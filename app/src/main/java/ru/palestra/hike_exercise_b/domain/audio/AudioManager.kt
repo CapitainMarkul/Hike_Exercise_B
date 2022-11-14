@@ -33,10 +33,10 @@ internal class AudioManager(
 ) : AudioManagerApi, LifecycleEventObserver {
 
     companion object {
-        private const val DEFAULT_SAMPLING_RATE_IN_HZ = 8000
-        private const val DEFAULT_CHANNEL_IN_MONO_CONFIG: Int = AudioFormat.CHANNEL_IN_DEFAULT
+        private const val DEFAULT_SAMPLING_RATE_IN_HZ = 16000
+        private const val DEFAULT_CHANNEL_IN_MONO_CONFIG: Int = AudioFormat.CHANNEL_IN_MONO
         private const val DEFAULT_CHANNEL_OUT_MONO_CONFIG: Int = AudioFormat.CHANNEL_OUT_MONO
-        private const val DEFAULT_AUDIO_FORMAT: Int = AudioFormat.ENCODING_PCM_16BIT
+        private const val DEFAULT_AUDIO_ENCODING_FORMAT: Int = AudioFormat.ENCODING_PCM_16BIT
         private const val DEFAULT_STREAM_TYPE: Int = AudioManager.STREAM_MUSIC
         private const val DEFAULT_TRANSFER_TYPE: Int = AudioTrack.MODE_STREAM
 
@@ -45,7 +45,7 @@ internal class AudioManager(
             AudioTrack.getMinBufferSize(
                 DEFAULT_SAMPLING_RATE_IN_HZ,
                 DEFAULT_CHANNEL_OUT_MONO_CONFIG,
-                DEFAULT_AUDIO_FORMAT
+                DEFAULT_AUDIO_ENCODING_FORMAT
             )
         }
     }
@@ -84,15 +84,14 @@ internal class AudioManager(
                 AudioSource.MIC,
                 DEFAULT_SAMPLING_RATE_IN_HZ,
                 DEFAULT_CHANNEL_IN_MONO_CONFIG,
-                DEFAULT_AUDIO_FORMAT,
+                DEFAULT_AUDIO_ENCODING_FORMAT,
                 doubleBufferSize
             )
         } else {
             AudioRecord.Builder()
-                .setAudioSource(AudioSource.VOICE_COMMUNICATION)
                 .setAudioFormat(
                     AudioFormat.Builder()
-                        .setEncoding(DEFAULT_AUDIO_FORMAT)
+                        .setEncoding(DEFAULT_AUDIO_ENCODING_FORMAT)
                         .setSampleRate(DEFAULT_SAMPLING_RATE_IN_HZ)
                         .setChannelMask(DEFAULT_CHANNEL_IN_MONO_CONFIG)
                         .build()
@@ -108,7 +107,7 @@ internal class AudioManager(
                 DEFAULT_STREAM_TYPE,
                 DEFAULT_SAMPLING_RATE_IN_HZ,
                 DEFAULT_CHANNEL_OUT_MONO_CONFIG,
-                DEFAULT_AUDIO_FORMAT,
+                DEFAULT_AUDIO_ENCODING_FORMAT,
                 doubleBufferSize,
                 DEFAULT_TRANSFER_TYPE
             )
@@ -121,7 +120,7 @@ internal class AudioManager(
                 )
                 .setAudioFormat(
                     AudioFormat.Builder()
-                        .setEncoding(DEFAULT_AUDIO_FORMAT)
+                        .setEncoding(DEFAULT_AUDIO_ENCODING_FORMAT)
                         .setChannelMask(DEFAULT_CHANNEL_OUT_MONO_CONFIG)
                         .setSampleRate(DEFAULT_SAMPLING_RATE_IN_HZ)
                         .build()
