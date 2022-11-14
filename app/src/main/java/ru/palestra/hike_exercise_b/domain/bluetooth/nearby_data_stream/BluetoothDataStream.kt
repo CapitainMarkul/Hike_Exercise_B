@@ -3,6 +3,7 @@ package ru.palestra.hike_exercise_b.domain.bluetooth.nearby_data_stream
 import android.bluetooth.BluetoothSocket
 import io.reactivex.Emitter
 import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -43,14 +44,25 @@ internal class BluetoothDataStream : BluetoothDataStreamApi {
             bluetoothConnectionSocket?.let { socket ->
                 while (!emitter.isDisposed) {
                     try {
-                        emitter.onNext(socket.inputStream.read().toByte())
-                    } catch (e: Exception) {
-                        ifOtherDeviceDisconnectedAction?.invoke()
+                        if (socket.isConnected) {
+                            emitter.onNext(socket.inputStream.read().toByte())
+                        }
+                    } catch (_: Exception) {
+                        notifierUiAboutConnectionError?.onNext(Unit)
                     }
                 }
             }
         }
     }
+
+    /* Для безопасного обновления UI при ошибках в других подписках. */
+    private var notifierUiAboutConnectionError: ObservableEmitter<Unit>? = null
+    private val mainThreadDisposable =
+        Observable.create<Unit> { notifierUiAboutConnectionError = it }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                ifOtherDeviceDisconnectedAction?.invoke()
+            }
 
     private var readStreamDisposable: Disposable? = null
     private var observeIncomingTransmissionStateDisposable: Disposable? = null
@@ -67,7 +79,7 @@ internal class BluetoothDataStream : BluetoothDataStreamApi {
                             e.printStackTrace()
                         } finally {
                             if (!socket.isConnected) {
-                                ifOtherDeviceDisconnectedAction?.invoke()
+                                notifierUiAboutConnectionError?.onNext(Unit)
                                 closeAllConnectionsIfNeeded()
                             }
                         }
@@ -149,6 +161,7 @@ internal class BluetoothDataStream : BluetoothDataStreamApi {
         ifOtherDeviceDisconnectedAction = null
         closeAllConnectionsIfNeeded()
 
+        mainThreadDisposable.disposeIfNeeded()
         readStreamDisposable?.disposeIfNeeded()
         writeStreamDisposable?.disposeIfNeeded()
         observeIncomingTransmissionStateDisposable?.disposeIfNeeded()

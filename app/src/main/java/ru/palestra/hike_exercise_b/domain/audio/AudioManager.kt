@@ -8,6 +8,7 @@ import android.media.AudioManager
 import android.media.AudioRecord
 import android.media.AudioTrack
 import android.media.AudioTrack.PLAYSTATE_PLAYING
+import android.media.AudioTrack.PLAYSTATE_STOPPED
 import android.media.MediaPlayer
 import android.media.MediaRecorder.AudioSource
 import android.os.Build
@@ -36,6 +37,8 @@ internal class AudioManager(
         private const val DEFAULT_CHANNEL_IN_MONO_CONFIG: Int = AudioFormat.CHANNEL_IN_DEFAULT
         private const val DEFAULT_CHANNEL_OUT_MONO_CONFIG: Int = AudioFormat.CHANNEL_OUT_MONO
         private const val DEFAULT_AUDIO_FORMAT: Int = AudioFormat.ENCODING_PCM_16BIT
+        private const val DEFAULT_STREAM_TYPE: Int = AudioManager.STREAM_MUSIC
+        private const val DEFAULT_TRANSFER_TYPE: Int = AudioTrack.MODE_STREAM
 
         /** Размер буфера, который используется для чтения/записи. */
         val MIN_BUFFER_SIZE by lazy {
@@ -61,7 +64,7 @@ internal class AudioManager(
 
     private val observableReadStream: Observable<ByteArray> by lazy {
         Observable.create { emitterReadStream = it }
-            .observeOn(Schedulers.newThread())
+            .observeOn(Schedulers.computation())
     }
 
     private var audioStreamHandlerDisposable =
@@ -102,18 +105,18 @@ internal class AudioManager(
     private val audioPlayer: AudioTrack by lazy {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             AudioTrack(
-                AudioManager.STREAM_MUSIC,
+                DEFAULT_STREAM_TYPE,
                 DEFAULT_SAMPLING_RATE_IN_HZ,
                 DEFAULT_CHANNEL_OUT_MONO_CONFIG,
                 DEFAULT_AUDIO_FORMAT,
-                MIN_BUFFER_SIZE,
-                AudioTrack.MODE_STREAM
+                doubleBufferSize,
+                DEFAULT_TRANSFER_TYPE
             )
         } else {
             AudioTrack.Builder()
                 .setAudioAttributes(
                     AudioAttributes.Builder()
-                        .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+                        .setLegacyStreamType(DEFAULT_STREAM_TYPE)
                         .build()
                 )
                 .setAudioFormat(
@@ -123,8 +126,8 @@ internal class AudioManager(
                         .setSampleRate(DEFAULT_SAMPLING_RATE_IN_HZ)
                         .build()
                 )
-                .setBufferSizeInBytes(MIN_BUFFER_SIZE)
-                .setTransferMode(AudioTrack.MODE_STREAM)
+                .setBufferSizeInBytes(doubleBufferSize)
+                .setTransferMode(DEFAULT_TRANSFER_TYPE)
                 .build()
         }
     }
@@ -182,15 +185,19 @@ internal class AudioManager(
         audioRecorder.stop()
     }
 
-    override fun playStreamAudio(audioStreamChunk: ByteArray) {
-        if (audioPlayer.playState != PLAYSTATE_PLAYING) {
+    override fun playAudio() {
+        if (audioPlayer.playState == PLAYSTATE_STOPPED) {
             audioPlayer.play()
         }
-
-        emitterReadStream?.onNext(audioStreamChunk)
     }
 
     override fun stopAudio() {
-        audioPlayer.stop()
+        if (audioPlayer.playState == PLAYSTATE_PLAYING) {
+            audioPlayer.stop()
+        }
+    }
+
+    override fun updateStreamAudio(audioStreamChunk: ByteArray) {
+        emitterReadStream?.onNext(audioStreamChunk)
     }
 }

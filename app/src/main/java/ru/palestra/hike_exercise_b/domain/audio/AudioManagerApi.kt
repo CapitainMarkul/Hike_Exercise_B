@@ -33,13 +33,16 @@ interface AudioManagerApi {
     /** Метод предназначен для прекращения записи голоса. */
     fun stopRecording()
 
-    /**
-     * Метод предназначен для начала проигрывания полученного потока данных из вне.
-     *
-     * @param audioStreamChunk чанк данных для воспроизведения.
-     * */
-    fun playStreamAudio(audioStreamChunk: ByteArray)
+    /** Метод предназначен для начала воспроизведения потокового аудио. */
+    fun playAudio()
 
     /** Метод предназначен для прекращения воспроизведения потокового аудио. */
     fun stopAudio()
+
+    /**
+     * Метод предназначен для проигрывания полученного потока данных из вне.
+     *
+     * @param audioStreamChunk чанк данных для воспроизведения.
+     * */
+    fun updateStreamAudio(audioStreamChunk: ByteArray)
 }

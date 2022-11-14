@@ -9,8 +9,6 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothDevice.ACTION_ACL_DISCONNECTED
 import android.bluetooth.BluetoothSocket
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -79,6 +77,9 @@ class MainActivity : AppCompatActivity(),
     }
 
     private val ifOtherDeviceDisconnectedAction: () -> Unit = {
+        binding.btnTalk.clearFocus()
+        binding.btnTalk.isActivated = false
+
         onConnectedDeviceUpdated(null)
         updateConnectViewState(AclEvent(ACTION_ACL_DISCONNECTED, null))
     }
@@ -415,7 +416,7 @@ class MainActivity : AppCompatActivity(),
             onObtainedVoiceChunkDataAction = { byteChunk ->
                 changeStateTalkButton(false)
 
-                audioManager.playStreamAudio(byteChunk)
+                audioManager.updateStreamAudio(byteChunk)
             },
             onObtainedLocationRawDataAction = { rawOtherDeviceGeolocation ->
                 val otherDeviceLocation = locationManager.tryConvertRawDataToLocation(rawOtherDeviceGeolocation)
@@ -501,24 +502,15 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    private fun changeStateTalkButton(enabled: Boolean) =
-        with(binding.btnTalk) {
-            if (isEnabled != enabled) {
-                isEnabled = enabled
-                if (!enabled) {
-                    /* Радио-эфир занят, помолчим. */
-                    stopVoiceRecord()
-                }
-            }
-        }
-
     private fun handleCheckMultiplyPermissions(result: Map<String, Boolean>) {
-        if (result.all { it.value }) {
-            /* Все пермишены получены - продолжаем работу. */
-            continueInitialize()
-        } else {
-            /* Разрашений недостаточно - просим пользователя о помощи. */
-            dialogManager.showOnboardingInfoDialog { requestRequiredPermissions(result) }
+        if (bluetoothManager == null) {
+            if (result.all { it.value }) {
+                /* Все пермишены получены - продолжаем работу. */
+                continueInitialize()
+            } else {
+                /* Разрашений недостаточно - просим пользователя о помощи. */
+                dialogManager.showOnboardingInfoDialog { requestRequiredPermissions(result) }
+            }
         }
     }
 
@@ -598,6 +590,22 @@ class MainActivity : AppCompatActivity(),
 
     private fun showToastMessage(messageText: String?, duration: Int = Toast.LENGTH_SHORT) =
         Toast.makeText(this, messageText, duration).show()
+
+
+    private fun changeStateTalkButton(enabled: Boolean) =
+        with(binding.btnTalk) {
+            if (isEnabled != enabled) {
+                isEnabled = enabled
+                if (!enabled) {
+                    /* Радио-эфир занят, то молчим и слушаем. */
+                    stopVoiceRecord()
+
+                    audioManager.playAudio()
+                } else {
+                    audioManager.stopAudio()
+                }
+            }
+        }
 
     private fun TextView.changeState(text: String, enabled: Boolean, visible: Boolean = true) =
         with(this) {
