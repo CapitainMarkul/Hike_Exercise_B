@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DeviceInfoButtonStyle" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:layout_marginTop">@dimen/default_padding_small</item>
+        <item name="android:background">@drawable/background_device_state</item>
+        <item name="android:textColor">@color/palette_blue_grey_400</item>
+        <item name="android:textSize">@dimen/medium_text_size_scale_on</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:enabled">false</item>
+    </style>
+</resources>

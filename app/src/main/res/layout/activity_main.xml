@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/palette_blue_grey_900"
+    tools:context=".presentation.MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:paddingTop="@dimen/default_padding"
+        android:paddingBottom="@dimen/bottom_sheet_header_peek">
+
+        <TextView
+            android:id="@+id/txt_my_device_state_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/my_device_state_title_text"
+            android:textColor="@color/palette_blue_grey_400"
+            android:textSize="@dimen/default_text_size_scale_on"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_device_state_connect_to_me"
+            style="@style/DeviceInfoButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:paddingHorizontal="@dimen/default_padding_half"
+            android:paddingVertical="@dimen/default_padding_half"
+            android:text="@string/my_device_state_connect_to_me_failed"
+            app:layout_constraintBottom_toTopOf="@+id/txt_device_scan_visibility"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_my_device_state_title"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@string/my_device_state_connect_to_me_success"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/txt_device_scan_visibility"
+            style="@style/DeviceInfoButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/default_padding_half"
+            android:paddingVertical="@dimen/default_padding_half"
+            android:text="@string/my_device_discovering_enabled_text"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/txt_device_location_visibility"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_device_state_connect_to_me"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/txt_device_location_visibility"
+            style="@style/DeviceInfoButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:paddingHorizontal="@dimen/default_padding_half"
+            android:paddingVertical="@dimen/default_padding_half"
+            android:text="@string/connected_device_location_not_sending_text"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_device_scan_visibility"
+            tools:visibility="visible"/>
+
+        <Button
+            android:id="@+id/btn_talk"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/background_task_btn"
+            android:enabled="false"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/start_talk_btn_text"
+            android:textColor="@color/palette_white_text_color"
+            android:textSize="@dimen/talk_btn_title_text_size"
+            app:autoSizeMaxTextSize="@dimen/talk_btn_title_text_size"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/txt_connect_states"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal_40"
+            app:layout_constraintWidth_percent="0.5"/>
+
+        <TextView
+            android:id="@+id/txt_connect_states"
+            style="@style/DeviceInfoButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:paddingHorizontal="@dimen/default_padding_half"
+            android:paddingVertical="@dimen/default_padding_half"
+            android:textColor="@color/palette_blue_grey_400"
+            android:textSize="@dimen/default_text_size_scale_on"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/connected_device_distance_text"
+            tools:visibility="visible"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_40"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/bsh_find_devices"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_sheet_all_height"
+        android:background="@drawable/background_bottom_sheet"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="@dimen/bottom_sheet_header_peek"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:layout_width="@dimen/bottom_sheet_header_peek_view_width"
+            android:layout_height="@dimen/bottom_sheet_header_peek_view_height"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/default_padding_half"
+            android:background="@drawable/background_bottom_peek_view"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_header_height"
+            android:divider="@drawable/items_divider"
+            android:elevation="@dimen/default_padding_half"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/btn_start_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:background="@drawable/background_button"
+                android:maxLines="2"
+                android:paddingHorizontal="@dimen/default_padding_half"
+                android:text="@string/start_search_nearby_title_text"
+                android:textAllCaps="false"
+                app:autoSizeMaxTextSize="@dimen/medium_text_size_scale_off"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"/>
+
+            <Button
+                android:id="@+id/btn_stop_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:background="@drawable/background_button"
+                android:maxLines="2"
+                android:paddingHorizontal="@dimen/default_padding_half"
+                android:text="@string/stop_search_nearby_title_text"
+                android:textAllCaps="false"
+                app:autoSizeMaxTextSize="@dimen/medium_text_size_scale_off"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"/>
+
+            <ProgressBar
+                android:id="@+id/pb_search_state"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_find_devices"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/palette_blue_grey_700"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_device_info"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

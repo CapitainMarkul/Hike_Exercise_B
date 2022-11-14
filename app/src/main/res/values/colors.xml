@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="palette_white_text_color">#FFFFFF</color>
+
+    <color name="palette_green_200">#A5D6A7</color>
+
+    <color name="palette_red_200">#EF9A9A</color>
+
+    <color name="palette_blue_grey_50">#ECEFF1</color>
+    <color name="palette_blue_grey_100">#CFD8DC</color>
+    <color name="palette_blue_grey_200">#B0DEC5</color>
+    <color name="palette_blue_grey_300">#90A4AE</color>
+    <color name="palette_blue_grey_400">#78909C</color>
+    <color name="palette_blue_grey_500">#607B8B</color>
+    <color name="palette_blue_grey_700">#455A64</color>
+    <color name="palette_blue_grey_800">#37474F</color>
+    <color name="palette_blue_grey_900">#263238</color>
+
+    <color name="palette_deep_orange_300">#FF8A64</color>
+    <color name="palette_deep_orange_500">#FF5722</color>
+</resources>

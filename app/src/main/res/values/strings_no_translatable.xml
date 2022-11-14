@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_bl_uuid" translatable="false">e28ae3f5-4368-451d-a6b3-9d49634d8d28</string>
+    <string name="app_bl_server_name" translatable="false">YandexCup_2022_exercise_B</string>
+    <string name="unknown_user_device_info" translatable="false">Unknown device</string>
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Going on a hike</string>
+
+    <string name="my_device_state_title_text">Status of your %s device:</string>
+
+    <string name="my_device_state_connect_to_me_success">Other users can connect to you.</string>
+    <string name="my_device_state_connect_to_me_failed">Other users cannot connect to you. Click to get more info.</string>
+
+    <string name="my_device_discovering_enabled_text">All is well, your device can be discovered by other users.</string>
+    <string name="my_device_discovering_disabled_text">Oops, unfortunately other users can\'t see you. Click to get more info.</string>
+
+    <string name="try_connect_to_device_text">Establishing a connection with: %s | %s</string>
+
+    <string name="connected_device_name_simple_text">You are currently talking with \'%s\'</string>
+    <string name="connected_device_distance_text">, who is \'%s\' meters away from you</string>
+
+    <string name="connected_device_location_sending_text">You share your location with the interlocutor.</string>
+    <string name="connected_device_location_not_sending_text">Your location is unknown. Click to get more info.</string>
+
+    <string name="finded_nearby_user_base_info">Now in touch %s</string>
+    <!-- TODO: перейти на Plurals -->
+    <string name="finded_nearby_user_detail_info">, is %s meters away from you</string>
+
+    <string name="start_search_nearby_title_text">Find companion</string>
+    <string name="stop_search_nearby_title_text">Stop search</string>
+
+    <string name="start_talk_btn_text">Talk</string>
+
+    <string name="already_connected">Already connected to this device!</string>
+
+    <string name="fatal_send_data_error">An error occurred while transmitting data</string>
+
+    <string name="dialog_questions_drop_connect">Do you want to stop communicating with this device?</string>
+
+    <string name="dialog_error_default_yes">Yes</string>
+    <string name="dialog_error_default_no">No</string>
+
+    <string name="dialog_error_start_socket_server">Alas, it was not possible to start the server for connecting third-party devices, because of this, other users will not be able to connect to you (you can). Let\'s try to fix it?</string>
+    <string name="dialog_error_start_socket_server_yes">Yes, let\'s fix it</string>
+    <string name="dialog_error_start_socket_server_no">No, leave as is</string>
+
+    <string name="dialog_error_bluetooth_disabled">Alas, Bluetooth turned off does not allow us to continue working..</string>
+    <string name="dialog_error_gps_disabled">Unfortunately, turning off GPS does not allow us to search for nearby devices.</string>
+
+    <string name="dialog_error_connect_was_lost">The data transfer was terminated</string>
+    <string name="dialog_error_connect_to_other_device">Failed to connect to the selected device! Check that the \'Let\'s Hike\' application is installed and running on the device, and there are no messages about the inability to connect to it.</string>
+
+    <string name="dialog_info_permission_yes">Set up permissions</string>
+    <string name="dialog_info_bluetooth_permission_denied">Alas, without your permission to access information from the Bluetooth module, we will not be able to search for and connect to other devices. Let\'s fix this?</string>
+
+    <string name="dialog_info_gps_permission_yes">Location settings</string>
+    <string name="dialog_info_gps_permission_denied">Unfortunately, without your permission to access location, we will not be able to search for nearby devices. Let\'s fix this?</string>
+
+    <string name="dialog_info_location_not_sending_text">Sorry, we couldn\'t get your location. Try opening your Maps application and \'discover yourself\', the problem should be fixed.</string>
+
+    <string name="dialog_info_record_audio_permission_denied">Without access to the microphone, we will not be able to record anything and transmit it to the interlocutor.</string>
+
+    <string name="dialog_onboarding_info">
+        The operation of this application is based on the search for nearby devices using Bluetooth.
+        To work correctly, the application needs access to some device parameters, which in
+        depending on the version of Android on your device may be private. After pressing \'OK\',
+        we will analyze your device and request read access to the minimum required device parameters.
+    </string>
+
+</resources>

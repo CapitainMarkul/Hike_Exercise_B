@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Идем в поход</string>
+
+    <string name="my_device_state_title_text">Статус вашего %s устройства:</string>
+
+    <string name="my_device_state_connect_to_me_success">К вам могут подключаться другие пользователи.</string>
+    <string name="my_device_state_connect_to_me_failed">К вам не могут подключаться другие пользователи. Нажмите, чтобы узнать подробности.</string>
+
+    <string name="my_device_discovering_enabled_text">Все хорошо, ваше устройство может быть обнаружено другими пользователями.</string>
+    <string name="my_device_discovering_disabled_text">Упс, к сожалению, другие пользователи вас не видят. Нажмите, чтобы узнать подробности.</string>
+
+    <string name="try_connect_to_device_text">Устанавливаем соединение с: %s | %s</string>
+
+    <string name="connected_device_name_simple_text">Сейчас на связи \'%s\'</string>
+    <string name="connected_device_distance_text">, находится в \'%s\' метрах от вас</string>
+
+    <string name="connected_device_location_sending_text">Вы передаете свое местоположение собеседнику.</string>
+    <string name="connected_device_location_not_sending_text">Ваше местоположение неизвестно. Нажмите, чтобы узнать подробности.</string>
+
+    <string name="finded_nearby_user_base_info">Сейчас на связи %s</string>
+    <!-- TODO: перейти на Plurals -->
+    <string name="finded_nearby_user_detail_info">, находится в %s метрах от вас</string>
+
+    <string name="start_search_nearby_title_text">Найти собеседника</string>
+    <string name="stop_search_nearby_title_text">Остановить поиск</string>
+
+    <string name="start_talk_btn_text">Говорить</string>
+
+    <string name="already_connected">Уже соединены с данным устройством!</string>
+
+    <string name="fatal_send_data_error">Произошла ошибка при передаче данных</string>
+
+    <string name="dialog_questions_drop_connect">Хотите прекратить сеанс связи с данным устройством?</string>
+
+    <string name="dialog_error_default_yes">Да</string>
+    <string name="dialog_error_default_no">Нет</string>
+
+    <string name="dialog_error_start_socket_server">Увы, не получилось запустить сервер для подключения сторонних устройств, из-за этого другие пользователи не смогут подключиться к вам (Вы - сможете). Попробуем исправить?</string>
+    <string name="dialog_error_start_socket_server_yes">Да, исправляем</string>
+    <string name="dialog_error_start_socket_server_no">Нет, оставляем как есть</string>
+
+    <string name="dialog_error_bluetooth_disabled">Увы, но выключенный Bluetooth не позволяет нам продолжить работу.</string>
+    <string name="dialog_error_gps_disabled">К сожалению, выключенный GPS не позволяет нам выполнить поиск устройств, находящихся поблизости.</string>
+
+    <string name="dialog_error_connect_was_lost">Передача данных была прекращена</string>
+    <string name="dialog_error_connect_to_other_device">Неудалось соединиться с выбранным устройством! Проверьте, что на устройстве установлено и запущено приложение \'Идем в поход\', а также отсутствуют сообщения о невозможности подключения к нему.</string>
+
+    <string name="dialog_info_permission_yes">Настроить разрешения</string>
+    <string name="dialog_info_bluetooth_permission_denied">Увы, но без вашего разрешения на постоянный доступ к информации от Bluetooth модуля, мы не сможем выполнять поиск и подключение других устройств. Давайте это исправим?</string>
+
+    <string name="dialog_info_gps_permission_yes">Настройки местоположения</string>
+    <string name="dialog_info_gps_permission_denied">К сожалению, но без вашего разрешения на доступ к местоположению, мы не сможем выполнить поиск устройств, находящихся поблизости. Давайте это исправим?</string>
+
+    <string name="dialog_info_location_not_sending_text">К сожалению, неудалось получить ваше местоположение. Попробуйте открыть ваше приложение карт и \'обнаружить себя\', после чего проблема должна быть устранена.</string>
+
+    <string name="dialog_info_record_audio_permission_denied">Без доступа к микрофону, мы не сможем ничего записать и передать собеседнику.</string>
+
+    <string name="dialog_onboarding_info">
+        Работа данного приложения основана на поиске близлежайших устройств при помощи Bluetooth.
+        Для корректной работы, приложению требуется доступ к некоторым параметрам устройства, которые в
+        зависимости от версии Android на вашем устройстве могут быть приватными. После нажатия \'ОК\',
+        мы проанализируем ваше устройство и запросим доступ на чтение минимально необходимых параметров устройства.
+    </string>
+
+</resources>
