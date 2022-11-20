@@ -140,21 +140,19 @@
             android:layout_marginTop="@dimen/default_padding_half"
             android:background="@drawable/background_bottom_peek_view"/>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_header_height"
             android:divider="@drawable/items_divider"
             android:elevation="@dimen/default_padding_half"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:showDividers="middle"
             android:weightSum="1">
 
             <Button
                 android:id="@+id/btn_start_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_marginEnd="@dimen/default_padding"
                 android:background="@drawable/background_button"
                 android:maxLines="2"
                 android:paddingHorizontal="@dimen/default_padding_half"
@@ -162,13 +160,18 @@
                 android:textAllCaps="false"
                 app:autoSizeMaxTextSize="@dimen/medium_text_size_scale_off"
                 app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform"/>
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_stop_search"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.35"/>
 
             <Button
                 android:id="@+id/btn_stop_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
                 android:background="@drawable/background_button"
                 android:maxLines="2"
                 android:paddingHorizontal="@dimen/default_padding_half"
@@ -176,17 +179,25 @@
                 android:textAllCaps="false"
                 app:autoSizeMaxTextSize="@dimen/medium_text_size_scale_off"
                 app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform"/>
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_start_search"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.3"/>
 
             <ProgressBar
                 android:id="@+id/pb_search_state"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1"
+                android:layout_marginStart="@dimen/default_padding_half"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_start_search"
+                app:layout_constraintStart_toEndOf="@+id/btn_stop_search"
+                app:layout_constraintTop_toTopOf="@+id/btn_start_search"
                 tools:visibility="visible"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_find_devices"

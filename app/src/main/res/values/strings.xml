@@ -58,10 +58,10 @@
     <string name="dialog_info_record_audio_permission_denied">Without access to the microphone, we will not be able to record anything and transmit it to the interlocutor.</string>
 
     <string name="dialog_onboarding_info">
-        The operation of this application is based on the search for nearby devices using Bluetooth.
-        To work correctly, the application needs access to some device parameters, which in
-        depending on the version of Android on your device may be private. After pressing \'OK\',
-        we will analyze your device and request read access to the minimum required device parameters.
+        To work correctly, the application will need access to some device parameters, which in
+        dependencies on your Android version may be private. After pressing \'OK\',
+        we will analyze your device and request access to use some of the parameters that are required
+        for the correct operation of the application.
     </string>
 
 </resources>
